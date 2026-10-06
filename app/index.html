@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f3ee">
+  <title>おぼえておえかき</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar"><a class="brand" href="#" aria-label="おぼえておえかき ホーム"><span class="brand-mark">✳</span><span>おぼえて<span class="brand-accent">おえかき</span></span></a><span class="edition">MEMORY SKETCH · 01</span></header>
+
+    <section id="home" class="screen home-screen active" aria-labelledby="home-title">
+      <div class="home-copy">
+        <span class="eyebrow"><span class="eyebrow-dot"></span> A LITTLE MEMORY GAME</span>
+        <h1 id="home-title">みて、覚えて、<br><span class="headline-accent">描いてみよう。</span></h1>
+        <p class="intro">お題を5秒だけ見て、30秒で描く。<br>記憶をたどる小さなお絵かきゲーム。</p>
+        <button id="start-button" class="button button-primary"><span>ゲームをはじめる</span><span class="button-arrow">↗</span></button>
+        <div class="howto"><div class="howto-step"><span class="step-number">01</span><span>5秒でお題を<br>おぼえる</span></div><span class="step-line"></span><div class="howto-step"><span class="step-number">02</span><span>30秒で自由に<br>描いてみる</span></div><span class="step-line"></span><div class="howto-step"><span class="step-number">03</span><span>そっくり度を<br>チェック</span></div></div>
+      </div>
+      <div class="hero-art" aria-hidden="true"><div class="art-sun"></div><div class="art-circle"></div><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-star star-one">✳</div><div class="art-star star-two">✦</div><div class="art-label">TODAY'S<br>CHALLENGE</div><div class="art-caption"><span class="caption-dot"></span> ひらめきを、かたちに</div></div>
+      <span class="home-index">01 <i>—</i> 03</span>
+    </section>
+
+    <section id="memory" class="screen game-screen" aria-labelledby="memory-title" hidden>
+      <div class="game-heading"><div><span class="eyebrow"><span class="eyebrow-dot"></span> STEP 01 · REMEMBER</span><h1 id="memory-title">よく見て、おぼえてね。</h1></div><div class="timer memory-timer"><span class="timer-label">おぼえる時間</span><span id="memory-count" class="timer-number">05<span>秒</span></span></div></div>
+      <div class="memory-stage"><div class="memory-card"><div class="card-topline"><span>よーく見てね</span><span class="card-spark">✳</span></div><img id="topic-image" alt="今回のお題"><div class="card-bottomline"><span class="caption-dot"></span><span>この絵をおぼえよう</span></div></div><div class="memory-note"><span class="note-icon">◉</span><span>形や色、どこに何があるか<br>覚えておくといいかも。</span></div></div>
+      <div class="progress-track"><span id="memory-progress"></span></div>
+    </section>
+
+    <section id="draw" class="screen game-screen draw-screen" aria-labelledby="draw-title" hidden>
+      <div class="game-heading draw-heading"><div><span class="eyebrow"><span class="eyebrow-dot"></span> STEP 02 · DRAW FROM MEMORY</span><h1 id="draw-title">思い出しながら描こう。</h1></div><div id="draw-timer" class="timer draw-timer"><span class="timer-label">のこり時間</span><span id="time-count" class="timer-number">30<span>秒</span></span></div></div>
+      <div class="workspace">
+        <div class="canvas-wrap"><canvas id="drawing-canvas" aria-label="絵を描くキャンバス"></canvas><span class="canvas-corner corner-tl"></span><span class="canvas-corner corner-br"></span><div id="canvas-hint" class="canvas-hint"><span>✳</span><span>ここに描いてね</span></div></div>
+        <aside class="tools-panel" aria-label="描画ツール">
+          <div class="tool-section"><div class="tool-label"><span>COLOR</span><span>色</span></div><div id="palette" class="palette"></div></div>
+          <div class="tool-section"><div class="tool-label"><span>BRUSH</span><span>太さ</span></div><div class="brush-options" role="group" aria-label="線の太さ"><button class="brush-button selected" data-size="3" aria-label="細い線"><i class="brush-dot thin"></i></button><button class="brush-button" data-size="7" aria-label="普通の線"><i class="brush-dot medium"></i></button><button class="brush-button" data-size="13" aria-label="太い線"><i class="brush-dot thick"></i></button></div></div>
+          <div class="tool-divider"></div><div class="tool-actions"><button id="eraser-button" class="tool-action" aria-pressed="false"><span class="eraser-icon">◩</span><span>消しゴム</span></button><button id="clear-button" class="tool-action"><span class="clear-icon">↺</span><span>まっさらに</span></button></div>
+          <div class="tool-tip"><span>✦</span> 思いきって描いてみよう！</div>
+        </aside>
+      </div>
+      <p class="draw-footnote"><span class="live-dot"></span> 描いた絵はこの端末内だけで採点されます</p>
+    </section>
+
+    <section id="result" class="screen game-screen result-screen" aria-labelledby="result-title" hidden>
+      <div class="result-heading"><span class="eyebrow"><span class="eyebrow-dot"></span> STEP 03 · YOUR RESULT</span><h1 id="result-title">よく描けました！</h1><p>覚えていたところ、見つかったかな？</p></div>
+      <div class="result-content"><div class="score-card"><div class="score-label">そっくりスコア</div><div class="score-number"><span id="score-value">0</span><small>点</small></div><div class="score-meter"><span id="score-meter-fill"></span></div><p id="score-message">記憶をたどって描いたね</p><span class="score-decoration">✳</span></div><div class="comparison"><article class="picture-card"><div class="picture-label"><span>おだい</span><span>01</span></div><img id="result-topic" alt="お題の絵"></article><span class="compare-mark">↔</span><article class="picture-card"><div class="picture-label"><span>あなたの絵</span><span>02</span></div><canvas id="result-canvas" aria-label="あなたの絵"></canvas></article></div></div>
+      <button id="retry-button" class="button button-primary retry-button"><span>もう一度あそぶ</span><span class="button-arrow">↗</span></button>
+    </section>
+    <footer class="footer"><span>TAKE A MOMENT, MAKE A MARK.</span><span>おぼえておえかき <b>© 2025</b></span></footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
