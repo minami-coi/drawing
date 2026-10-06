@@ -225,7 +225,11 @@
     const proportionScore = Math.exp(-Math.abs(Math.log(aspectT / aspectS)));
     const inkRatio = sketchFeatures.mask.reduce((sum, value) => sum + value, 0) / (128 * 128);
     const completeness = Math.min(1, inkRatio / .018);
-    return Math.max(1, Math.min(100, Math.round((shapeScore * .66 + colorScore * .23 + proportionScore * .11) * (65 + completeness * 35))));
+    const similarity = (shapeScore * .66 + colorScore * .23 + proportionScore * .11) * (0.65 + completeness * 0.35);
+
+    // Expand differences around an average match instead of compressing every drawing
+    // into the middle of the scale. A raw similarity of .5 maps to 50 points.
+    return Math.max(0, Math.min(100, Math.round((similarity - 0.5) * 180 + 50)));
   }
 
   function pointFromEvent(event) {
