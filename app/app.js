@@ -278,6 +278,36 @@
     $('#start-button').disabled = false;
     showScreen('home');
   });
+  $('#share-button').addEventListener('click', async () => {
+    if (!navigator.share) {
+      const text = `おぼえておえかきで描きました！そっくりスコアは${$('#score-value').textContent}点。`;
+      const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+      window.open(intentUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    try {
+      const blob = await new Promise((resolve, reject) => {
+        resultCanvas.toBlob((imageBlob) => imageBlob ? resolve(imageBlob) : reject(new Error('PNG画像を作成できませんでした。')), 'image/png');
+      });
+      const imageFile = new File([blob], 'memory-sketch.png', { type: 'image/png' });
+      const shareData = {
+        title: 'おぼえておえかき',
+        text: `おぼえておえかきで描きました！そっくりスコアは${$('#score-value').textContent}点。`,
+        files: [imageFile]
+      };
+      if (navigator.canShare && !navigator.canShare({ files: shareData.files })) {
+        alert('このブラウザは画像ファイルの共有に対応していません。対応ブラウザからお試しください。');
+        return;
+      }
+      await navigator.share(shareData);
+    } catch (error) {
+      if (error.name !== 'AbortError') {
+        console.error(error);
+        alert('画像を共有できませんでした。もう一度お試しください。');
+      }
+    }
+  });
 
   loadTopics();
 })();

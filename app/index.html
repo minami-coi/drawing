@@ -49,7 +49,8 @@
     <section id="result" class="screen game-screen result-screen" aria-labelledby="result-title" hidden>
       <div class="result-heading"><span class="eyebrow"><span class="eyebrow-dot"></span> STEP 03 · YOUR RESULT</span><h1 id="result-title">よく描けました！</h1><p>覚えていたところ、見つかったかな？</p></div>
       <div class="result-content"><div class="score-card"><div class="score-label">そっくりスコア</div><div class="score-number"><span id="score-value">0</span><small>点</small></div><div class="score-meter"><span id="score-meter-fill"></span></div><p id="score-message">記憶をたどって描いたね</p><span class="score-decoration">✳</span></div><div class="comparison"><article class="picture-card"><div class="picture-label"><span>おだい</span><span>01</span></div><img id="result-topic" alt="お題の絵"></article><span class="compare-mark">↔</span><article class="picture-card"><div class="picture-label"><span>あなたの絵</span><span>02</span></div><canvas id="result-canvas" aria-label="あなたの絵"></canvas></article></div></div>
-      <button id="retry-button" class="button button-primary retry-button"><span>もう一度あそぶ</span><span class="button-arrow">↗</span></button>
+      <div class="result-actions"><button id="retry-button" class="button button-primary retry-button"><span>もう一度あそぶ</span><span class="button-arrow">↗</span></button><button id="share-button" class="button button-share"><span class="x-mark" aria-hidden="true">𝕏</span><span>シェア</span></button></div>
+      <p class="share-note">共有メニューから共有先を選べます</p>
     </section>
     <footer class="footer"><span>TAKE A MOMENT, MAKE A MARK.</span><span>おぼえておえかき <b>© 2025</b></span></footer>
   </main>
