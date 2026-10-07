@@ -279,9 +279,9 @@
     showScreen('home');
   });
   $('#share-button').addEventListener('click', async () => {
+    const shareText = `おぼえておえかきで描きました！そっくりスコアは${$('#score-value').textContent}点。\nhttps://minami-coi.github.io/drawing/`;
     if (!navigator.share) {
-      const text = `おぼえておえかきで描きました！そっくりスコアは${$('#score-value').textContent}点。`;
-      const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+      const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
       window.open(intentUrl, '_blank', 'noopener,noreferrer');
       return;
     }
@@ -293,7 +293,7 @@
       const imageFile = new File([blob], 'memory-sketch.png', { type: 'image/png' });
       const shareData = {
         title: 'おぼえておえかき',
-        text: `おぼえておえかきで描きました！そっくりスコアは${$('#score-value').textContent}点。`,
+        text: shareText,
         files: [imageFile]
       };
       if (navigator.canShare && !navigator.canShare({ files: shareData.files })) {
