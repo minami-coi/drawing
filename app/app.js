@@ -309,5 +309,20 @@
     }
   });
 
+  $('#download-button').addEventListener('click', () => {
+    resultCanvas.toBlob((blob) => {
+      if (!blob) {
+        alert('画像を保存できませんでした。もう一度お試しください。');
+        return;
+      }
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'memory-sketch.png';
+      link.click();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }, 'image/png');
+  });
+
   loadTopics();
 })();
